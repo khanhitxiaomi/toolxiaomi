@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TOOL CÀI TIVI TRÊN ĐIỆN THOẠI V2</title>
+
+<!-- 🌐 ICON WEB (FAVICON) -->
+<link rel="icon" type="image/png"
+href="https://github.com/khanhitpro/khanhtool/releases/download/adb/icononline.png">
+
+<meta name="theme-color" content="#00c853">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0b0f14;
+  color:#fff;
+}
+
+/* HEADER */
+.header{
+  padding:12px 14px;
+  background:linear-gradient(90deg,#00c853,#00b0ff);
+  font-weight:bold;
+  position:sticky;
+  top:0;
+  z-index:999;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* ICON HEADER */
+.header img{
+  width:32px;
+  height:32px;
+  border-radius:8px;
+  object-fit:cover;
+  box-shadow:0 0 10px rgba(0,0,0,0.4);
+}
+
+/* CONTAINER */
+.container{padding:12px;}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:12px;
+}
+
+/* CARD */
+.card{
+  background:linear-gradient(145deg,#151c24,#1b2430);
+  padding:14px;
+  border-radius:16px;
+  transition:0.2s;
+}
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 18px rgba(0,255,180,0.2);
+}
+
+.title{color:#00e5ff;font-weight:600;}
+.guide{color:#ffcc00;font-size:13px;margin:6px 0;}
+.status{color:#aaa;font-size:12px;margin:6px 0;}
+
+.copy-btn{
+  width:100%;
+  padding:12px;
+  background:linear-gradient(90deg,#00c853,#00e676);
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* TERMUX BOX */
+.termux-box{
+  background:linear-gradient(145deg,#151c24,#1b2430);
+  padding:22px;
+  border-radius:16px;
+  margin-bottom:14px;
+}
+
+.termux-inner{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.termux-icon{
+  width:78px;
+  height:78px;
+  border-radius:14px;
+  object-fit:cover;
+}
+
+.termux-title{
+  font-size:26px;
+  font-weight:bold;
+  color:#ff2d2d;
+}
+
+.termux-note{
+  font-size:14px;
+  color:#aaa;
+  margin:6px 0 12px;
+}
+
+.termux-btn{
+  padding:14px 22px;
+  font-size:15px;
+  font-weight:bold;
+  background:linear-gradient(90deg,#ff2d2d,#ff0000);
+  color:white;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔥 HEADER + ICON -->
+<div class="header">
+  <img src="https://github.com/khanhitpro/khanhtool/releases/download/adb/icononline.png">
+  KHÁNH IT TOOL CÀI TIVI TRÊN ĐIỆN THOẠI
+</div>
+
+<div class="container">
+
+<!-- TERMUX -->
+<div class="termux-box">
+
+  <div class="termux-inner">
+
+    <img class="termux-icon"
+      src="https://github.com/khanhitxiaomi/khanhitxiaomi/releases/download/web/ICON2.png">
+
+    <div>
+
+      <div class="termux-title">PHẦN MỀM</div>
+
+      <div class="termux-note">
+        ⚠️ Bấm Vào Tải Ngay và Cài Đặt 21-04-2026
+        📥 Mở Termux, rồi dán code nền + Enter
+        🚀 Coppy code Nano và dán Ctrl + X , Y để xác nhận
+      </div>
+
+      <button class="termux-btn"
+        onclick="window.open('https://play.google.com/store/apps/details?id=com.termux')">
+        📥 TẢI NGAY
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- TOOL LIST -->
+<div class="grid" id="list"></div>
+
+</div>
+
+<script>
+
+const jsonURL =
+"https://raw.githubusercontent.com/khanhitxiaomi/toolxiaomi/main/linkcodetoolxiaomi.json";
+
+/* COPY */
+function copyText(txt){
+  navigator.clipboard.writeText(txt).then(()=>{
+    alert("📋 Coppy Thành Công !");
+  });
+}
+
+/* LOAD TXT */
+async function loadTXT(url){
+  try{
+    let res = await fetch(url);
+    return await res.text();
+  }catch{
+    return "❌ Lỗi load file";
+  }
+}
+
+/* START */
+async function start(){
+
+  let res = await fetch(jsonURL);
+  let data = await res.json();
+
+  let list = Array.isArray(data) ? data : Object.values(data);
+
+  let container = document.getElementById("list");
+
+  list.forEach((item,i)=>{
+
+    let card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <div class="title">📌 ${item.name || ("Tool " + (i+1))}</div>
+      <div class="guide">📖 ${item.guide || "Không có hướng dẫn"}</div>
+      <div class="status">⚡ Ready</div>
+    `;
+
+    let btn = document.createElement("button");
+    btn.className = "copy-btn";
+    btn.innerText = "📋 Copy Code & Dán Vào Temux";
+
+    btn.onclick = async ()=>{
+      let txt = await loadTXT(item.url || item);
+      copyText(txt);
+    };
+
+    card.appendChild(btn);
+    container.appendChild(card);
+  });
+}
+
+start();
+
+</script>
+
+</body>
+</html>
