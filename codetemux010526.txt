@@ -12,10 +12,10 @@ NC='\033[0m'
 
 # ===== UI =====
 banner_menu1() {
-  echo -e "${BLUE}📡 MENU KẾT NỐI TIVI XIAOMI PRO${NC}"
+  echo -e "${BLUE}📡 MENU KẾT NỐI TIVI XIAOMI PRO V2${NC}"
   echo -e "${WHITE}👨‍💻 Khánh IT | ☎ 0967.341.608${NC}"
-  echo -e "${WHITE}📦    Phiên bản: 4.68${NC}"
-  echo -e "${WHITE}⚠️ Bản Cập Nhật: 21-04-2026${NC}"
+  echo -e "${WHITE}📦    Phiên bản: 4.66${NC}"
+  echo -e "${WHITE}⚠️ Bản Cập Nhật: 01-05-2026${NC}"
 
   echo -e "${BLUE}────────────────────────────${NC}"
 
