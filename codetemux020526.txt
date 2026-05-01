@@ -14,22 +14,19 @@ NC='\033[0m'
 banner_menu1() {
   echo -e "${BLUE}📡 MENU KẾT NỐI TIVI XIAOMI PRO${NC}"
   echo -e "${WHITE}👨‍💻 Khánh IT | ☎ 0967.341.608${NC}"
-  echo -e "${WHITE}📦    Phiên bản: 4.68${NC}"
-  echo -e "${WHITE}⚠️ Bản Cập Nhật: 21-04-2026${NC}"
+  echo -e "${WHITE}📦    Phiên bản: 4.66${NC}"
+  echo -e "${WHITE}⚠️ Bản Cập Nhật: 01-05-2026${NC}"
 
   echo -e "${BLUE}────────────────────────────${NC}"
-
-  echo -e "${CYAN}📝 HƯỚNG DẪN${NC}"
-  echo -e "${YELLOW}➤ Nhập IP TV (vd: 192.168.1.10)${NC}"
-  echo -e "${YELLOW}➤ TV và máy cùng WiFi${NC}"
-
   echo ""
-
-  echo -e "${MAGENTA}⚠️ LƯU Ý${NC}"
-  echo -e "${WHITE}• Bật ADB Debug trên TV${NC}"
-  echo -e "${WHITE}• Nếu không kết nối → kiểm tra IP${NC}"
-  echo -e "${WHITE}• Có thể cần bật Wireless Debug${NC}"
-
+  echo -e "${MAGENTA}📺 HƯỚNG DẪN KẾT NỐI TIVI${NC}"
+  echo -e "${CYAN}🎮 Điều khiển:${NC} Nhấn ${YELLOW}↑ lên trên cùng${NC} → vào ${WHITE}Cài đặt ⚙${NC}"
+  echo -e "${CYAN}🌐 Ngôn ngữ:${NC} Nhấn ${YELLOW}↓ 4 lần${NC} → Language → ${GREEN}English${NC}"
+  echo -e "${CYAN}🔓 Developer:${NC} Vào ${WHITE}About${NC} → chọn ${YELLOW}Model${NC} → ${GREEN}OK 9 lần${NC}"
+  echo -e "${CYAN}⛔ Lưu ý:${NC} Tắt ${RED}Update tự động${NC}"
+  echo -e "${CYAN}⚙️ Quyền:${NC} Account - Security → Bật ${GREEN}ADB Debugging${NC} + ${GREEN}Unknown sources${NC}"
+  echo -e "${CYAN}📶 Kết nối:${NC} Bật ${WHITE}WiFi${NC} - Lấy địa chỉ IP : ${ip}"
+  echo ""
   echo -e "${BLUE}────────────────────────────${NC}"
 
   echo -e "${RED}⏻ 0. Thoát${NC}"
@@ -39,8 +36,8 @@ banner_menu1() {
 
 banner_menu2() {
   echo -e "${GREEN}=======================================${NC}"
-  echo -e "${GREEN}🚀 CÔNG CỤ CÀI ĐẶT TIVI XIAOMI TỰ ĐỘNG${NC}"
-  echo -e "${WHITE}👨‍💻 Khánh IT - 0967.341.608 - 4.68${NC}"
+  echo -e "${GREEN}🚀 CÔNG CỤ CÀI ĐẶT TIVI XIAOMI TỰ ĐỘNG V2${NC}"
+  echo -e "${WHITE}👨‍💻 Khánh IT - 0967.341.608 - 4.66${NC}"
   echo -e "${GREEN}---------------------------------------${NC}"
 
   echo -e "$TV_INFO_LINE"
@@ -83,17 +80,15 @@ get_tv_info() {
   BUILD_SHOW=$(adb shell getprop ro.build.version.incremental | tr -d '\r')
   DATE=$(adb shell getprop ro.build.date | tr -d '\r')
   SERIAL=$(adb shell getprop ro.serialno | tr -d '\r')
-  MANUFACTURER=$(adb shell getprop ro.product.manufacturer | tr -d '\r')
-  DEVICE=$(adb shell getprop ro.product.device | tr -d '\r')
-  BOARD=$(adb shell getprop ro.product.board | tr -d '\r')
 
   # Nếu không có PANEL thì gán mặc định
   [ -z "$PANEL" ] && PANEL="?"
 
   # ===== TẠO BIẾN TV_INFO_LINE =====
 TV_INFO_LINE="${CYAN}📺 Thông Tin Tivi:${NC} $MODEL ${GRAY}|${NC} ${YELLOW}$BRAND${NC} ${GRAY}|${NC} ${GREEN}$PANEL Inch${NC}\n\
-${MAGENTA}🤖 Android${NC} $ANDROID ${GRAY}|${NC} ${BLUE}$BUILD_SHOW${NC} ${GRAY}|${NC} ${RED}$PATCH${NC}\n\
-${CYAN}📅 Build Date:${NC} $DATE ${GRAY}|${NC} ${YELLOW}🔢 Serial:${NC} $SERIAL\n\
+${MAGENTA}🤖 Android:${NC} $ANDROID ${GRAY}|${NC} ${BLUE}$BUILD_SHOW${NC} ${GRAY}|${NC} ${RED}$PATCH${NC}\n\
+${CYAN}📅 Build Date:${NC} $DATE\n\
+${YELLOW}🔢 Serial:${NC} $SERIAL ${GRAY}|${NC} ${GREEN}🌐 IP:${NC} ${ip}:5555"
 }
 
 
