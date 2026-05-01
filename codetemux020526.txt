@@ -94,7 +94,6 @@ get_tv_info() {
 TV_INFO_LINE="${CYAN}📺 Thông Tin Tivi:${NC} $MODEL ${GRAY}|${NC} ${YELLOW}$BRAND${NC} ${GRAY}|${NC} ${GREEN}$PANEL Inch${NC}\n\
 ${MAGENTA}🤖 Android${NC} $ANDROID ${GRAY}|${NC} ${BLUE}$BUILD_SHOW${NC} ${GRAY}|${NC} ${RED}$PATCH${NC}\n\
 ${CYAN}📅 Build Date:${NC} $DATE ${GRAY}|${NC} ${YELLOW}🔢 Serial:${NC} $SERIAL\n\
-${GREEN}🏭 Manufacturer:${NC} $MANUFACTURER ${GRAY}|${NC} ${CYAN}📱 Device:${NC} $DEVICE ${GRAY}|${NC} ${MAGENTA}🧩 Board:${NC} $BOARD"
 }
 
 
@@ -426,6 +425,7 @@ projectivy_install() {
     echo "📦 Đang cài: $apk"
     adb install -g "$DIR/$apk" && echo "✅ Thành công" || echo "❌ Lỗi"
   done
+  adb shell am start -n com.nghenhin24h.vietplaytv/.MainActivity
 
   # 4. Thiết lập Accessibility + Keyboard
   echo "⚙️ Thiết lập Accessibility và Keyboard"
@@ -459,6 +459,11 @@ projectivy_install() {
   adb push "$DIR/projectiv1.plbackup" "/sdcard/Download/"
   adb push "$DIR/projectiv2.plbackup" "/sdcard/Download/"
 
+  adb shell pm grant com.spocky.projengmenu android.permission.READ_EXTERNAL_STORAGE
+  adb shell pm grant com.spocky.projengmenu android.permission.WRITE_SECURE_SETTINGS
+  adb shell appwidget grantbind --package com.spocky.projengmenu --user 0
+  adb shell settings put global stay_on_while_plugged_in 3
+  adb shell am start -n com.spocky.projengmenu/com.spocky.projengmenu.ui.home.MainActivity 
 
   # 7. Cấp quyền going nói
   adb shell am force-stop com.mitv.tvhome
