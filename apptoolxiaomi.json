@@ -1,0 +1,80 @@
+{
+  "apps": [
+    {
+      "name": "AllApp",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/allapp.apk"
+    },
+    {
+      "name": "Ảnh con hổ",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/anhconho.jpg"
+    },
+    {
+      "name": "Ảnh con vẹt 1",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/anhconvet1.jpg"
+    },
+    {
+      "name": "Ảnh con vẹt 2",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/anhconvet2.jpg"
+    },
+    {
+      "name": "Video con sóc",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/consoc.mp4"
+    },
+    {
+      "name": "CoTivi",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/cotivi.apk"
+    },
+    {
+      "name": "DL Store",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/dlstore.apk"
+    },
+    {
+      "name": "File Manager",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/file.apk"
+    },
+    {
+      "name": "iMedia",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/imedia.apk"
+    },
+    {
+      "name": "Google Voice Katniss 2.2.0",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/katniss_2.2.0.apk"
+    },
+    {
+      "name": "Leanback Keyboard",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/keyboard.apk"
+    },
+    {
+      "name": "MStore",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/mstore.apk"
+    },
+    {
+      "name": "Projectivy Launcher",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/p.apk"
+    },
+    {
+      "name": "Khanh Store",
+      "url": "https://github.com/khanhitpro/XIAOMI/releases/download/khoapp1/khanhstore-6.9.6.apk"
+    },
+    {
+      "name": "Backup Projectivy 1",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/projectiv1.plbackup"
+    },
+    {
+      "name": "Backup Projectivy 2",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/projectiv2.plbackup"
+    },
+    {
+      "name": "VietPlay",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/vietplay.apk"
+    },
+    {
+      "name": "YouTube TV",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/youtube.apk"
+    },
+    {
+      "name": "Tải Về App",
+      "url": "https://github.com/khanhitxiaomi/toolxiaomi/releases/download/toolxiaomi/taive.apk"
+    }
+  ]
+}
