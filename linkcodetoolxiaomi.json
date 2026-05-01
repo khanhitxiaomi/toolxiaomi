@@ -1,0 +1,27 @@
+[
+  {
+    "name": "1- CHUẨN BỊ NỀN CHO TEMUX CHẠY",
+    "url": "https://raw.githubusercontent.com/dinhkhackhanhdz-blip/khanhtool/main/khanhtool/update.txt",
+    "guide": "Coppy code này → Mở phần mềm vừa cài → Paste hoặc dán vào → Enter để chạy"
+  },
+  {
+    "name": "2 - CODE NANO TEMUX CHUẨN NEW",
+    "url": "https://raw.githubusercontent.com/khanhitpro/khanhtool/main/khanhtool/temuxmahoav3.txt",
+    "guide": "Coppy code này → Paste vào NANO → Bấm lệnh để lưu Ctrl + X + Enter → Phấm phím Y + Enter để đồng ý chạy"
+  },
+  {
+    "name": "3 - LỆNH CHẠY TIVI KHÁC",
+    "url": "https://raw.githubusercontent.com/khanhitpro/khanhtool/main/khanhtool/setup.txt",
+    "guide": "Nhập mật khẩu để sử dụng hoặc liên hệ: 0967.341.608"
+  },
+  {
+    "name": "XOÁ CODE NANO ĐỂ CHẠY TEMUX MỚI",
+    "url": "https://raw.githubusercontent.com/khanhitpro/khanhtool/main/khanhtool/setupv2.txt",
+    "guide": "Nhập mật khẩu để sử dụng hoặc liên hệ: 0967.341.608"
+  },
+  {
+    "name": "CODE NANO TEMUX BẢN DỰ PHÒNG",
+    "url": "https://raw.githubusercontent.com/khanhitpro/khanhtool/main/khanhtool/temuxmaxhoav2.txt",
+    "guide": "Coppy code này → Paste vào NANO → Bấm lệnh để lưu Ctrl + X + Enter → Phấm phím Y + Enter để đồng ý chạy - BẢN CÓ MẬT KHẨU DÙNG THỬ"
+  }
+]
