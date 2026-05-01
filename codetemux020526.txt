@@ -101,11 +101,11 @@ menu_connect() {
     [ "$ip" = "0" ] && break
 
     adb connect "$ip:5555" >/dev/null 2>&1
-    sleep 5
+    sleep 8
 
     if adb devices | grep -q "$ip:5555.*device"; then
       echo -e "${GREEN}✅ KẾT NỐI THÀNH CÔNG!${NC}"
-      sleep 1
+      sleep 3
       get_tv_info
       menu_main
     else
@@ -391,6 +391,16 @@ install_all() {
 projectivy_install() {
   DIR="$HOME/storage/shared/apktool"
 
+   # 0. Cài riêng VTV trước
+  echo "📦 Đang cài VTV"
+  if adb install -g "$DIR/vietplay.apk"; then
+    echo "✅ Cài thành công VTV"
+    adb shell am start -n com.nghenhin24h.vietplaytv/.MainActivity
+    sleep 8 
+  else
+    echo "❌ Lỗi khi cài: p.apk"
+  fi
+
   # 1. Cài riêng p.apk trước
   echo "📦 Đang cài: p.apk"
   if adb install -g "$DIR/p.apk"; then
@@ -416,11 +426,12 @@ projectivy_install() {
   done
 
   # 3. Cài khối app mới
-  for apk in allapp.apk youtube.apk khanhstore-6.9.6.apk taive.apk imedia.apk vietplay.apk cotivi.apk; do
+  for apk in allapp.apk youtube.apk khanhstore-6.9.6.apk taive.apk imedia.apk cotivi.apk; do
     echo "📦 Đang cài: $apk"
     adb install -g "$DIR/$apk" && echo "✅ Thành công" || echo "❌ Lỗi"
   done
   adb shell am start -n com.nghenhin24h.vietplaytv/.MainActivity
+  sleep 5
 
   # 4. Thiết lập Accessibility + Keyboard
   echo "⚙️ Thiết lập Accessibility và Keyboard"
@@ -453,12 +464,6 @@ projectivy_install() {
   # Đẩy file backup vào Download
   adb push "$DIR/projectiv1.plbackup" "/sdcard/Download/"
   adb push "$DIR/projectiv2.plbackup" "/sdcard/Download/"
-
-  adb shell pm grant com.spocky.projengmenu android.permission.READ_EXTERNAL_STORAGE
-  adb shell pm grant com.spocky.projengmenu android.permission.WRITE_SECURE_SETTINGS
-  adb shell appwidget grantbind --package com.spocky.projengmenu --user 0
-  adb shell settings put global stay_on_while_plugged_in 3
-  adb shell am start -n com.spocky.projengmenu/com.spocky.projengmenu.ui.home.MainActivity 
 
   # 7. Cấp quyền going nói
   adb shell am force-stop com.mitv.tvhome
