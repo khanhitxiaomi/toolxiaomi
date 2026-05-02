@@ -390,17 +390,6 @@ install_all() {
 
 projectivy_install() {
   DIR="$HOME/storage/shared/apktool"
-
-   # 0. Cài riêng VTV trước
-  echo "📦 Đang cài VTV"
-  if adb install -g "$DIR/vietplay.apk"; then
-    echo "✅ Cài thành công VTV"
-    adb shell am start -n com.nghenhin24h.vietplaytv/.MainActivity
-    sleep 8 
-  else
-    echo "❌ Lỗi khi cài: p.apk"
-  fi
-
   # 1. Cài riêng p.apk trước
   echo "📦 Đang cài: p.apk"
   if adb install -g "$DIR/p.apk"; then
@@ -430,8 +419,6 @@ projectivy_install() {
     echo "📦 Đang cài: $apk"
     adb install -g "$DIR/$apk" && echo "✅ Thành công" || echo "❌ Lỗi"
   done
-  adb shell am start -n com.nghenhin24h.vietplaytv/.MainActivity
-  sleep 5
 
   # 4. Thiết lập Accessibility + Keyboard
   echo "⚙️ Thiết lập Accessibility và Keyboard"
@@ -473,9 +460,17 @@ projectivy_install() {
   adb shell settings put secure voice_interaction_service com.google.android.katniss/.service.HotwordService
   adb shell am start -n com.spocky.projengmenu/com.spocky.projengmenu.ui.home.MainActivity
 
-  # 8. Khởi động lại thiết bị
+  # 8. Cài riêng VTV
+  echo "📦 Đang cài VTV"
+  if adb install -g "$DIR/vietplay.apk"; then
+    echo "✅ Cài thành công VTV" 
+  else
+    echo "❌ Lỗi khi cài: p.apk"
+  fi
+
+  # 9. Khởi động lại thiết bị
   echo "🔄 Đang gửi lệnh khởi động lại..."
-  sleep 5
+  sleep 15
   adb reboot
   echo "✅ Đã hoàn tất cài đặt tivi!"
   echo "   Quay lại menu chính sau 3 giây..."
