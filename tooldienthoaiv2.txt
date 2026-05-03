@@ -1,0 +1,173 @@
+#!/bin/bash
+
+VERSION="4.68"
+BASE_URL="https://raw.githubusercontent.com/khanhitxiaomi/toolxiaomi/main/android"
+set +x 2>/dev/null
+
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[1;34m'
+CYAN='\033[1;36m'
+NC='\033[0m'
+
+# ==============================
+# KIỂM TRA KEY (GIAO DIỆN TV)
+# ==============================
+check_key() {
+  DEVICE=$(getprop ro.serialno 2>/dev/null || hostname)
+
+  while true; do
+    clear
+
+    echo ""
+    echo -e "${CYAN}📺 CÔNG CỤ CÀI ĐẶT TIVI XIAOMI BẢN QUYỀN V2${NC}"
+    echo -e "${YELLOW}⚡ CÀI ĐẶT TỰ ĐỘNG - NHANH - ỔN ĐỊNH${NC}"
+    echo -e "${GREEN}👨‍💻 KHÁNH IT | 0967.341.608 | 4.66${NC}"
+    echo -e "${BLUE}🔧 Hỗ trợ: ADB • APK • TV Android • SYSTEM${NC}"
+    echo ""
+    echo -e "${BLUE}🔑 HƯỚNG DẪN NHẬP MẬT KHẨU:${NC}"
+    echo -e "${WHITE}➤ Nhập KEY được cấp để tiếp tục${NC}"
+    echo -e "${WHITE}➤ KEY phân biệt chữ HOA / chữ thường${NC}"
+    echo -e "${WHITE}➤ Sai KEY sẽ không truy cập được tool${NC}"
+    echo ""
+    echo ""
+
+    trap 'stty echo; echo' EXIT
+
+    stty -echo
+    read -e -r -p "$(echo -e "${YELLOW}🔒 NHẬP MẬT KHẨU: ${NC}")" USER_KEY
+    stty echo
+
+    # xoá khoảng trắng thừa
+    USER_KEY=$(xargs <<< "$USER_KEY")
+    echo ""
+
+
+    echo -e "${BLUE}⏳ ĐANG XÁC THỰC MẬT KHẨU...${NC}"
+    sleep 0.5
+    # lấy danh sách key
+    DATA=$(curl -s --connect-timeout 5 "$BASE_URL/keys.txt")
+
+
+    if [ -z "$USER_KEY" ]; then
+      echo -e "${RED}❌ CHƯA NHẬP KEY${NC}"
+      sleep 1
+      stty echo
+      sleep 1
+      continue
+    fi
+
+    LINE=$(echo "$DATA" | grep -m 1 "^${USER_KEY}|")
+    if [ -z "$LINE" ]; then
+      echo -e "${RED}❌ KEY KHÔNG ĐÚNG${NC}"
+      sleep 1
+      stty echo
+      sleep 1
+      continue
+    fi
+
+
+    STATUS=$(echo "$LINE" | cut -d'|' -f2)
+    KEY_DEVICE=$(echo "$LINE" | cut -d'|' -f3)
+    if [ "$STATUS" != "active" ]; then
+      echo -e "${RED}❌ KEY ĐÃ BỊ KHÓA${NC}"
+      sleep 1
+      stty echo
+      sleep 1
+      continue
+    fi
+
+
+    if [ -n "$KEY_DEVICE" ] && [ "$KEY_DEVICE" != "$DEVICE" ]; then
+      echo -e "${RED}❌ THIẾT BỊ KHÔNG KHỚP${NC}"
+      sleep 1
+      stty echo
+      sleep 1
+      continue
+    fi
+
+
+echo ""
+echo -ne "${YELLOW}🔄 Đang xác thực KEY"
+for i in {1..3}; do
+    echo -ne "."
+    sleep 0.4
+done
+
+
+ echo ""
+ echo -e "${BLUE}🔐 KẾT NỐI THÀNH CÔNG${NC}"
+ echo -e "${GREEN}✔ KEY HỢP LỆ${NC} ${YELLOW}- ĐÃ XÁC THỰC OK${NC}"
+ sleep 1
+ break
+ done
+}
+
+# ===== LOAD CORE =====
+load_core() {
+  echo -e "${BLUE}📦 LOAD CORE...${NC}"
+
+  BASE_URL="https://raw.githubusercontent.com/khanhitxiaomi/toolxiaomi/main/android"
+
+  DIR="$HOME/storage/shared/apktool"
+  TMP="$DIR/core.txt"
+
+  mkdir -p "$DIR"
+
+  loading
+
+  # tải file an toàn
+  if ! curl -fsSL --connect-timeout 10 "$BASE_URL/core.txt" -o "$TMP"; then
+    echo -e "${RED}❌ LỖI TẢI CORE${NC}"
+    exit 1
+  fi
+
+  # kiểm tra file
+  if [ ! -s "$TMP" ]; then
+    echo -e "${RED}❌ FILE CORE RỖNG${NC}"
+    exit 1
+  fi
+
+  # giải mã base64
+  CODE=$(base64 -d "$TMP" 2>/dev/null)
+
+  if [ -z "$CODE" ]; then
+    echo -e "${RED}❌ GIẢI MÃ LỖI${NC}"
+    exit 1
+  fi
+
+  echo -e "${GREEN}🚀 KHỞI ĐỘNG TOOL...${NC}"
+  sleep 1
+
+  # chạy core
+  bash -c "$CODE"
+}
+
+# ==============================
+# CHẠY TOOL
+# ==============================
+clear
+echo ""
+echo ""
+echo -e "${GREEN}🚀 ĐÂY LÀ TOOL TIVI XIAOMI BẢN QUYỀN${NC}"
+echo -e "${CYAN}📺 Công cụ cài đặt & tối ưu Tivi Xiaomi${NC}"
+
+echo ""
+echo -e "${YELLOW}⚡ Tự động hoá toàn bộ: cài app • cấp quyền • tối ưu hệ thống${NC}"
+echo -e "${WHITE}🔧 Hỗ trợ: ADB • APK • Android TV • TV nội địa / quốc tế${NC}"
+
+echo ""
+echo -e "${GREEN}👨‍💻 Khánh IT${NC} ${WHITE}| ☎ 0967.341.608${NC} ${WHITE}| 🔢 Phiên bản: 4.68${NC}"
+
+echo ""
+echo -e "${BLUE}📡 Trạng thái: Đang khởi động tool...${NC}"
+echo -e "${CYAN}⏳ Vui lòng chờ trong giây lát${NC}"
+echo ""
+echo -e "${GREEN}⚡ Đang khởi động hệ thống...${NC}"
+echo ""
+
+
+check_key
+check_update
+load_core
